@@ -6,7 +6,6 @@ import { ProductService } from './product/product.service';
 import { ProductController } from './product/product.controller';
 import { EmployeeModule } from './employee/employee.module';
 import { CategoryModule } from './category/category.module';
-import { StudentModule } from './student/student.module';
 import { UserRolesController } from './user-roles/user-roles.controller';
 import { ExceptionController } from './exception/exception.controller';
 import { LoggerMiddleware } from './middleware/logger/logger.middleware';
@@ -16,12 +15,12 @@ import { EnvService } from './env/env.service';
 import { EnvController } from './env/env.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { StudentModule } from './student/student.module';
 
 @Module({
   imports: [
     EmployeeModule,
     CategoryModule,
-    StudentModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -32,6 +31,7 @@ import { MongooseModule } from '@nestjs/mongoose';
       }),
       inject: [ConfigService],
     }),
+    StudentModule,
   ],
   controllers: [
     AppController,

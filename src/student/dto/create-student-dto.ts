@@ -1,20 +1,13 @@
-import { Type } from 'class-transformer';
-import {
-  IsDefined,
-  IsInt,
-  IsNotEmpty,
-  IsNumber,
-  IsString,
-  Min,
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateStudentDto {
+  @IsNotEmpty()
   @IsString()
   name: string;
-  @IsDefined({ message: 'Age is required' })
-  @Type(() => Number)
-  @IsNumber({}, { message: 'Age must be a number' })
-  @IsInt({ message: 'Age must be an integer' })
-  @Min(1, { message: 'Age must be at least 1' })
-  age: number;
+
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+
+  // Add other fields if needed
 }
