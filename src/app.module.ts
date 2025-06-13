@@ -16,6 +16,8 @@ import { EnvController } from './env/env.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { StudentModule } from './student/student.module';
+import { RelationsModule } from './relations/relations.module';
+import { RelationsService } from './relations/relations.service';
 
 @Module({
   imports: [
@@ -32,6 +34,7 @@ import { StudentModule } from './student/student.module';
       inject: [ConfigService],
     }),
     StudentModule,
+    RelationsModule,
   ],
   controllers: [
     AppController,
@@ -42,7 +45,13 @@ import { StudentModule } from './student/student.module';
     DatabaseController,
     EnvController,
   ],
-  providers: [AppService, ProductService, DatabaseService, EnvService],
+  providers: [
+    AppService,
+    ProductService,
+    DatabaseService,
+    EnvService,
+    // RelationsService,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
