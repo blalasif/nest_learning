@@ -1,15 +1,29 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Product } from './schemas/product.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class ProductService {
-  private products = [
-    { id: 1, name: 'mobile', price: 20000 },
-    { id: 2, name: 'Tablet', price: 40000 },
-  ];
-  getAllProducts() {
-    return this.products;
+  constructor(
+    @InjectModel(Product.name) private ProductModel: Model<Product>,
+  ) {}
+  async createProduct(): Promise<Product> {
+    const product = new this.ProductModel({
+      title: 'Gaming Laptops',
+      tags: [
+        {
+          name: 'Awesome',
+        },
+        {
+          name: 'Wow',
+        },
+      ],
+    });
+
+    return product.save();
   }
-  getProductById(id: number) {
-    return this.products.find((product) => product.id === id);
+  async getAllProducts(): Promise<Product[]> {
+    return this.ProductModel.find();
   }
 }

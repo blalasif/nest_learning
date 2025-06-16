@@ -2,9 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserController } from './user/user.controller';
-import { ProductService } from './product/product.service';
-import { ProductController } from './product/product.controller';
-import { EmployeeModule } from './employee/employee.module';
+
 import { CategoryModule } from './category/category.module';
 import { UserRolesController } from './user-roles/user-roles.controller';
 import { ExceptionController } from './exception/exception.controller';
@@ -15,13 +13,13 @@ import { EnvService } from './env/env.service';
 import { EnvController } from './env/env.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { StudentModule } from './student/student.module';
 import { RelationsModule } from './relations/relations.module';
 import { RelationsService } from './relations/relations.service';
+import { EmployeeModule } from './employee/employee.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
-    EmployeeModule,
     CategoryModule,
     ConfigModule.forRoot({
       isGlobal: true,
@@ -33,13 +31,13 @@ import { RelationsService } from './relations/relations.service';
       }),
       inject: [ConfigService],
     }),
-    StudentModule,
     RelationsModule,
+    EmployeeModule,
+    ProductModule,
   ],
   controllers: [
     AppController,
     UserController,
-    ProductController,
     UserRolesController,
     ExceptionController,
     DatabaseController,
@@ -47,7 +45,6 @@ import { RelationsService } from './relations/relations.service';
   ],
   providers: [
     AppService,
-    ProductService,
     DatabaseService,
     EnvService,
     // RelationsService,
